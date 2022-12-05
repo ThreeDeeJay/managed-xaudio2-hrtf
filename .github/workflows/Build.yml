@@ -21,9 +21,9 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
 
-    - name: .NetFramework Action Template
-      uses: auycro/netframework-action-template@v0.0.2
-
-    - name: Build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ${{env.SOLUTION_FILE_PATH}}
+    - name: .Net Build
+      uses: EasyDesk/action-dotnet-build@v1.0.0
+      with:
+        build-args: /p:Platform=x64
+        build-configuration: ${{env.BUILD_CONFIGURATION}}
+        path: Xaudio2Hrtf.sln
