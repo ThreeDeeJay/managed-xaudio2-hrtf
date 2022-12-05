@@ -9,12 +9,16 @@ env:
 
 jobs:
   Build:
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     steps:
     - uses: actions/checkout@v3
 
-    - uses: actions/setup-dotnet@v3
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1.1.3
       with:
-        dotnet-version: '4.6.1'
-    - run: dotnet build ${{env.SOLUTION_FILE_PATH}}
+        vs-version: 14.0
+        msbuild-architecture: x64
+        
+    - name: Build app for release
+      run: msbuild Xaudio2Hrtf.sln -t:rebuild -verbosity:diag -property:Configuration=Release
