@@ -14,8 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: .Net Build
-      uses: EasyDesk/action-dotnet-build@v1.0.0
+    - uses: actions/setup-dotnet@v3
       with:
-        build-configuration: ${{env.BUILD_CONFIGURATION}}
-        path: ${{env.SOLUTION_FILE_PATH}}
+        dotnet-version: '4.6.1'
+    - run: dotnet build ${{env.SOLUTION_FILE_PATH}}
